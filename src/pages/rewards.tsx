@@ -1,3 +1,3 @@
 export default function Rewards() {
-  return <p>Under Development.</p>
+  return <p>Under Development. </p>
 }
