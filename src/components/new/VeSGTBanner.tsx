@@ -6,6 +6,7 @@ export default function VeSGTBanner() {
       viewBox="0 0 925 284"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="w-full"
     >
       <path
         d="M13.1777 88.9817C22.5714 67.3702 37.5384 48.6425 56.547 34.7151C75.5556 20.7877 97.9233 12.1608 121.361 9.71707"
