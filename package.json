@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.4",
+    "@radix-ui/react-popover": "^1.0.6",
+    "@radix-ui/react-select": "^1.2.2",
+    "@radix-ui/react-switch": "^1.0.3",
+    "@radix-ui/react-toggle-group": "^1.0.4",
     "@rainbow-me/rainbowkit": "^1.0.8",
     "@rebass/forms": "^4.0.6",
     "@reduxjs/toolkit": "^1.9.3",

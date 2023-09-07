@@ -1,4 +1,4 @@
-export default function VeSGTBanner() {
+export default function ChartsBanner() {
   return (
     <svg
       width="925"

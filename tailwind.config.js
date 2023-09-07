@@ -145,18 +145,19 @@ module.exports = {
       backgroundSurface: '#25292F',
       backgroundBackdrop: '#333942',
       backgroundInteractive: '#323942',
+      backgroundMoreInteractive: '#454d59',
       backgroundScrim: opacify(72, colors.gray900),
       backgroundOutline: colors.gray850,
 
       textPrimary: colors.white50,
-      textSecondary: opacify(72, colors.gray50),
+      textSecondary: '#cfcfcf',
       textTertiary: '#8D8F92',
 
       accent: '#F2CB44',
       contrastWithAccent: '#3c3c3c',
       secondary: '#b9babc',
 
-      accentAction: colors.blue400,
+      accentAction: '#42A0FF',
       accentActive: colors.blue400,
       accentSuccess: colors.green300,
       accentWarning: colors.yellow300,
