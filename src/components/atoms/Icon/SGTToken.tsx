@@ -1,0 +1,53 @@
+export default function SGTToken({ size }: { size: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width={size} height={size} rx="18" fill="#111111" />
+      <rect
+        x="7.71429"
+        y="12.3428"
+        width="2.05714"
+        height="11.3143"
+        rx="1.02857"
+        fill="#EE3A26"
+      />
+      <rect
+        x="12.3429"
+        y="9.77136"
+        width="2.05714"
+        height="16.4571"
+        rx="1.02857"
+        fill="#F9D146"
+      />
+      <rect
+        x="16.9714"
+        y="7.71423"
+        width="2.05714"
+        height="20.5714"
+        rx="1.02857"
+        fill="#58B743"
+      />
+      <rect
+        x="21.6"
+        y="9.77136"
+        width="2.05714"
+        height="16.4571"
+        rx="1.02857"
+        fill="#3683D1"
+      />
+      <rect
+        x="26.2286"
+        y="12.3428"
+        width="2.05714"
+        height="11.3143"
+        rx="1.02857"
+        fill="#9546EC"
+      />
+    </svg>
+  )
+}

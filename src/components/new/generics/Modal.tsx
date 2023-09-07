@@ -10,6 +10,10 @@ import { TokenInfo } from '@/constants/types'
 import * as Popover from '@radix-ui/react-popover'
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
 import * as Switch from '@radix-ui/react-switch'
+import SolaceV2Logo from '@/components/atoms/Icon/SolaceV2Logo'
+import CalendarIcon from '@/components/atoms/Icon/CalendarIcon'
+import Image from 'next/image'
+import SGTToken from '@/components/atoms/Icon/SGTToken'
 
 export const Modal = ({
   settings,
@@ -67,18 +71,6 @@ export const Modal = ({
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
-  )
-}
-
-export default function TestTheThing() {
-  return (
-    <Modal
-      title="Test"
-      content="Test"
-      submitText="Submit"
-      onSubmit={() => console.log('Submitted')}
-      trigger={<button>Trigger</button>}
-    />
   )
 }
 
@@ -189,8 +181,7 @@ function CurrencySelectInput2() {
   }
 
   return (
-    <div className="relative">
-      a
+    <div className="relative ">
       <GenericInputSection
         hasArrow
         placeholder={'$'}
@@ -215,6 +206,7 @@ function CurrencySelectInput2() {
         value={inputValue}
         onChange={(e: any) => setInputValue(e.target.value)}
       />
+
       <Select.Root onValueChange={handleSelectedCoin}>
         <Select.Trigger className="cursor-pointer">
           {selectedD1?.symbol ?? 'Choose currency'}
@@ -389,6 +381,100 @@ export function AddLiquidityModal({ children }: { children: React.ReactNode }) {
         </div>
       }
       submitText="Add Liquidity"
+      onSubmit={() => alert('Submitted')}
+      trigger={children}
+    />
+  )
+}
+
+export const LockToGetVeSGTModal = ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
+  return (
+    <Modal
+      title="Lock to get veSGT"
+      // settings={<SettingsPopover />} no settings
+      content={
+        <div className="flex flex-col gap-4">
+          <div>
+            <Label>How much do you want to lock?</Label>
+            <div className="flex gap-4">
+              <div className="flex gap-2 p-2 items-center bg-backgroundMoreInteractive rounded">
+                <SGTToken size={36} />
+                <span className="font-semibold whitespace-nowrap">
+                  B-80SGT-20WETH
+                </span>
+              </div>
+              <div className="flex">
+                <input
+                  className="flex-grow py-4 pr-2 w-full outline-none text-base bg-backgroundInteractive border-l-2 border-t-2 border-b-2 border-backgroundMoreInteractive transition-bg duration-200 h-full focus:bg-backgroundMoreInteractive rounded-l text-right"
+                  type="text"
+                  placeholder="0.00"
+                  value={''}
+                  onChange={(e) => {}}
+                />
+                <div className="rounded-r bg-backgroundInteractive border-t-2 border-r-2 border-b-2 border-backgroundMoreInteractive hover:brightness-125 transition-all duration-200 px-4 py-2 cursor-pointer flex items-center font-semibold text-accent uppercase text-sm">
+                  Max
+                </div>
+              </div>
+            </div>
+            <div className="text-sm text-textSecondary mt-2 flex justify-between">
+              <div>Balance: 0.0127 (~$0.05)</div>
+              <div className="underline text-accentAction underline-offset-4 hover:brightness-125 cursor-pointer">
+                Get B-80SGT-20WETH
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <Label>Lock until</Label>
+            <div className="flex gap-4 flex-col">
+              <div className="flex gap-2 px-2 py-4 items-center w-full bg-backgroundMoreInteractive rounded justify-between">
+                <div>18.07.2024</div>
+                <CalendarIcon />
+              </div>
+              <div className="flex gap-2 px-2 py-2 items-center w-full bg-backgroundMoreInteractive rounded justify-between text-sm">
+                <div>Total voting escrow</div>
+                <div>0 veSGT</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+      submitText="Lock"
+      onSubmit={() => alert('Submitted')}
+      trigger={children}
+    />
+  )
+}
+
+export const VoteModal = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <Modal
+      title="Gauge vote"
+      // settings={<SettingsPopover />} no settings
+      content={
+        <div>
+          <ul>
+            <li>
+              Your vote directs future liquidity mining emissions starting from
+              the next period on Thursday at 0:00 UTC.
+            </li>
+            <li>
+              Voting power is set at the time of the vote. If you get more veBAL
+              later, resubmit your vote to use your increased power.
+            </li>
+            <li>
+              Votes are timelocked for 10 days. If you vote now, no edits can be
+              made until 11 June 2023.
+            </li>
+          </ul>
+          <div className="mt-6">weth 21%</div>
+        </div>
+      }
+      submitText="Vote"
       onSubmit={() => alert('Submitted')}
       trigger={children}
     />

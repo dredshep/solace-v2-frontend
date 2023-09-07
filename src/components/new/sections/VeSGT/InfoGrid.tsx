@@ -1,5 +1,5 @@
 import DashBox from '../../generics/DashBox'
-import { AddLiquidityModal } from '../../generics/Modal'
+import { AddLiquidityModal, LockToGetVeSGTModal } from '../../generics/Modal'
 
 export default function InfoGrid() {
   return (
@@ -29,22 +29,26 @@ export default function InfoGrid() {
           verticalPadding="Bigger"
         />
       </AddLiquidityModal>
-      <DashBox
-        title="My locked  B-80SGT-20WETH"
-        mainValue="$3,584.12"
-        subValue="0"
-        onClick={() => {}}
-        grayTone="Light"
-        verticalPadding="Bigger"
-      />
-      <DashBox
-        title="Locked Until"
-        mainValue="15 Apr 2024"
-        subValue="107 Days "
-        onClick={() => {}}
-        grayTone="Light"
-        verticalPadding="Bigger"
-      />
+      <LockToGetVeSGTModal>
+        <DashBox
+          title="My locked  B-80SGT-20WETH"
+          mainValue="$3,584.12"
+          subValue="0"
+          onClick={() => {}}
+          grayTone="Light"
+          verticalPadding="Bigger"
+        />
+      </LockToGetVeSGTModal>
+      <LockToGetVeSGTModal>
+        <DashBox
+          title="Locked Until"
+          mainValue="15 Apr 2024"
+          subValue="107 Days "
+          onClick={() => {}}
+          grayTone="Light"
+          verticalPadding="Bigger"
+        />
+      </LockToGetVeSGTModal>
     </div>
   )
 }

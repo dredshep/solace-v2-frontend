@@ -1,3 +1,5 @@
+import { VoteModal } from '../../generics/Modal'
+
 function _Table({ data }: { data: typeof dummyData }) {
   return (
     <div
@@ -44,9 +46,11 @@ function _Table({ data }: { data: typeof dummyData }) {
             {row.myVotes.toFixed(2)}%
           </div>
           <div className="bg-backgroundInteractive p-4 flex items-center justify-end rounded-r">
-            <button className="border-2 border-accent rounded bg-transparent text-accent px-8 py-2">
-              Vote
-            </button>
+            <VoteModal>
+              <button className="border-2 border-accent rounded bg-transparent text-accent px-8 py-2">
+                Vote
+              </button>
+            </VoteModal>
           </div>
         </>
       ))}
