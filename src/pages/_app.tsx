@@ -8,7 +8,14 @@ import ProviderUpdater from '../store/provider/providerUpdater'
 import ToastUpdater from '../store/toast/toastUpdater'
 
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
-import { Goerli, Aurora, Mainnet, Fantom, Polygon } from '@/constants/networks'
+import {
+  Goerli,
+  Aurora,
+  Mainnet,
+  Fantom,
+  Polygon,
+  Sepolia,
+} from '@/constants/networks'
 import { publicProvider } from 'wagmi/providers/public'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
@@ -95,7 +102,7 @@ function Updaters() {
 
 export default function App({ Component, pageProps }: AppProps) {
   const { chains, publicClient, webSocketPublicClient } = configureChains(
-    [Mainnet, Polygon, Aurora, Fantom, Goerli],
+    [Mainnet, Polygon, Aurora, Fantom, Goerli, Sepolia],
     [
       alchemyProvider({ apiKey: String(ALCHEMY_ETHEREUM_API_KEY) }),
       alchemyProvider({ apiKey: String(ALCHEMY_POLYGON_API_KEY) }),
