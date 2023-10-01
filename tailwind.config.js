@@ -146,8 +146,6 @@ module.exports = {
       backgroundBackdrop: '#333942',
       backgroundInteractive: '#323942',
       backgroundMoreInteractive: '#454d59',
-      backgroundScrim: opacify(72, colors.gray900),
-      backgroundOutline: colors.gray850,
 
       textPrimary: colors.white50,
       textSecondary: '#cfcfcf',
@@ -161,31 +159,6 @@ module.exports = {
       accentActive: colors.blue400,
       accentSuccess: colors.green300,
       accentWarning: colors.yellow300,
-      accentFailure: colors.red400,
-      accentCritical: colors.red400,
-      accentInquiry: colors.purple300,
-
-      accentActionSoft: opacify(24, colors.blue400),
-      accentActiveSoft: opacify(24, colors.blue400),
-      accentSuccessSoft: opacify(24, colors.green300),
-      accentWarningSoft: opacify(24, colors.yellow300),
-      accentFailureSoft: opacify(12, colors.red400),
-      accentInquirySoft: opacify(12, colors.purple300),
-
-      accentActionHighlighted: colors.blue300,
-      accentActiveHighlighted: colors.blue300,
-      accentSuccessHighlighted: colors.green200,
-      accentWarningHighlighted: colors.yellow200,
-      accentFailureHighlighted: colors.red300,
-      accentInquiryHighlighted: colors.purple200,
-
-      accentTextDarkPrimary: opacify(80, colors.gray700),
-      accentTextDarkSecondary: colors.gray400,
-      accentTextDarkTertiary: colors.gray300,
-
-      accentTextLightPrimary: colors.gray50,
-      accentTextLightSecondary: colors.gray100,
-      accentTextLightTertiary: colors.gray150,
     },
     extend: {
       height: {

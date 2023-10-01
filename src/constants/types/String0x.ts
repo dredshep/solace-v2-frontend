@@ -1,0 +1,2 @@
+type String0x = `0x${string}`
+export default String0x
