@@ -1,8 +1,8 @@
 import sepoliaDefaultPool from '@/constants/pools/sepoliaDefaultPool'
 import { useAccount } from 'wagmi'
-import { useLockIntoVotingEscrow } from './hooks/useLockIntoVotingEscrow'
-import { ValidatedInput } from './ValidatedInput'
-import useBlockTimestamp from './hooks/useBlockTimestamp'
+import { useLockIntoVotingEscrow } from '@/hooks/lock/useLockIntoVotingEscrow'
+import { ValidatedInput } from '@/components/new/lockPlayground/ValidatedInput'
+import useBlockTimestamp from '@/hooks/lock/useBlockTimestamp'
 import { useEffect } from 'react'
 
 export default function Lock() {
@@ -46,25 +46,27 @@ export default function Lock() {
         </div>
 
         <ValidatedInput poolAddress={sepoliaDefaultPool.address} />
-        <button
-          onClick={() => write?.()}
-          className="mt-4 w-full px-4 py-2 bg-accentAction text-white rounded-lg hover:bg-accentActive transition duration-300 ease-in-out"
-        >
-          Create Lock (using hardcoded params)
-        </button>
-        <div className="mt-4 text-center text-accent">
-          {isLoading ? (
-            <div className="text-accentWarning">Waiting for transaction…</div>
-          ) : isSuccess ? (
-            <div className="text-accentSuccess">Transaction successful!</div>
-          ) : (
-            <div className="text-white">
-              Transaction hash:{' '}
-              {data?.hash || (
-                <span className="text-accentWarning">Not yet initiated</span>
-              )}
-            </div>
-          )}
+        <div className="flex gap-4">
+          <button
+            onClick={() => write?.()}
+            className="mt-4 w-64 px-4 py-2 bg-accentAction text-white rounded-lg hover:bg-accentActive transition duration-300 ease-in-out"
+          >
+            Create Lock
+          </button>
+          <div className="mt-4 text-center text-accent text-sm">
+            {isLoading ? (
+              <div className="text-accentWarning">Waiting for transaction…</div>
+            ) : isSuccess ? (
+              <div className="text-accentSuccess">Transaction successful!</div>
+            ) : (
+              <div className="text-white">
+                Transaction hash:{<br />}
+                {data?.hash || (
+                  <span className="text-accentWarning">Not yet initiated</span>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

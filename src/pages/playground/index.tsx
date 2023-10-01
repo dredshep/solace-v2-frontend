@@ -29,11 +29,11 @@ import {
   ALCHEMY_GOERLI_API_KEY,
   ALCHEMY_POLYGON_API_KEY,
   Z_TABLE,
-} from '../constants'
-import { TransactionCondition } from '../constants/enums'
-import { ReadToken } from '../constants/types'
-import { variants } from '../styles/animation-styles'
-import { fixed, formatAmount } from '../utils'
+} from '@/constants/index'
+import { TransactionCondition } from '@/constants/enums'
+import { ReadToken } from '@/constants/types'
+import { variants } from '@/styles/animation-styles'
+import { fixed, formatAmount } from '@/utils'
 import { useAppSelector } from '@/store/_hooks'
 import { useAccount, useNetwork } from 'wagmi'
 import { useToast } from '@/hooks/useToast'
