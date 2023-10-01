@@ -2,12 +2,28 @@ import sepoliaDefaultPool from '@/constants/pools/sepoliaDefaultPool'
 import { useAccount } from 'wagmi'
 import { useLockIntoVotingEscrow } from './hooks/useLockIntoVotingEscrow'
 import { ValidatedInput } from './ValidatedInput'
+import useBlockTimestamp from './hooks/useBlockTimestamp'
+import { useEffect } from 'react'
 
 export default function Lock() {
+  const timestamp = useBlockTimestamp()
+  const bigintTimestampUnix = BigInt(timestamp ?? 0n)
+  const secondsInWeek = 604800n
+  // Calculate the current week number, rounded down
+  const currentWeekNumber = bigintTimestampUnix / secondsInWeek
+  // Set unlock time for 20 weeks into the future
+  const unlockTime = currentWeekNumber + 20n
+
   const { data, write, isLoading, isSuccess } = useLockIntoVotingEscrow({
     amount: 1000n,
-    unlockTime: 604800n,
+    unlockTime,
+    enabled: !!timestamp,
   })
+
+  useEffect(() => {
+    console.log('current week number: ', currentWeekNumber)
+    console.log('unlock time: ', unlockTime)
+  }, [currentWeekNumber, unlockTime])
 
   return (
     <div className="mx-4 flex flex-col items-center justify-center h-screen bg-background">

@@ -9,11 +9,13 @@ import sgtDeploymentAddresses from '@/constants/contracts/sgtDeployments'
 type useLockIntoVotingEscrowProps = {
   amount: bigint
   unlockTime: bigint
+  enabled?: boolean
 }
 
 export function useLockIntoVotingEscrow({
   amount,
   unlockTime,
+  enabled = true,
 }: useLockIntoVotingEscrowProps) {
   const { config } = usePrepareContractWrite({
     address: sgtDeploymentAddresses.VotingEscrow,
@@ -30,6 +32,7 @@ export function useLockIntoVotingEscrow({
       // time in seconds to lock for
       unlockTime,
     ],
+    enabled,
   })
 
   const { data, write } = useContractWrite(config)

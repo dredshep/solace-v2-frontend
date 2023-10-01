@@ -16,7 +16,8 @@ export const useLockAmountInputValidation = (poolAddress: String0x) => {
   useEffect(() => {
     let validAmount = BigInt(0)
     try {
-      validAmount = BigInt(inputAmount)
+      // make sure to multiply by 10^18 to get the correct amount
+      validAmount = BigInt(inputAmount) * 10n ** 18n
       setReason(null)
     } catch (error) {
       setIsAmountValid(false)
