@@ -4,7 +4,6 @@ import { useLockIntoVotingEscrow } from '@/hooks/lock/useLockIntoVotingEscrow'
 import { ValidatedInput } from '@/components/new/lockPlayground/ValidatedInput'
 import useBlockTimestamp from '@/hooks/lock/useBlockTimestamp'
 import { useEffect } from 'react'
-import AllowanceAndBalanceTable from '@/components/new/lockPlayground/AllowanceAndBalanceTable'
 import { useApproveToken } from '@/hooks/lock/useApproveToken'
 import { useAllowance } from '@/hooks/lock/useAllowance'
 import sgtDeploymentAddresses from '@/constants/contracts/sgtDeployments'
@@ -13,8 +12,11 @@ import classnames from 'classnames'
 import Image from 'next/image'
 import { useLockedBalance } from '@/hooks/lock/useLockedBalance'
 import { useLockedEnd } from '@/hooks/lock/useLockedEnd'
-import PlaygroundDataTable from '@/components/new/generics/PlaygroundDataTable'
+import PlaygroundDataTable, {
+  PlaygroundDataTableRowData,
+} from '@/components/new/generics/PlaygroundDataTable'
 import formatBigInt from '@/utils/numberFormatting/formatBigInt'
+import convertUnixToFormattedDate from '@/utils/dateFormatting/convertUnixToFormattedDate'
 
 export default function Lock() {
   const timestamp = useBlockTimestamp()
@@ -93,13 +95,6 @@ export default function Lock() {
     balance !== undefined &&
     allowance < balance?.value
 
-  const convertUnixToFormattedDate = (unixTimestamp: number) => {
-    const dateObj = new Date(unixTimestamp * 1000)
-    const date = dateObj.toISOString().split('T')[0]
-    const time = dateObj.toTimeString().split(' ')[0]
-    const formattedDate = `${date} ${time} GMT`
-    return formattedDate
-  }
   const end1 = unixEndDate
   const end2 = unixEndDate2
 
@@ -132,7 +127,7 @@ export default function Lock() {
       value: end2,
       formatFunc: (val: bigint) => convertUnixToFormattedDate(Number(val)),
     },
-  ]
+  ] as PlaygroundDataTableRowData[]
 
   return (
     <div className="mx-4 flex flex-col items-center justify-center h-screen bg-background">
@@ -155,13 +150,6 @@ export default function Lock() {
         </div>
 
         <ValidatedInput poolAddress={sepoliaDefaultPool.address} />
-        <AllowanceAndBalanceTable
-          allowance={allowance}
-          balance={balance?.value}
-          end1={unixEndDate}
-          end2={unixEndDate2}
-          lockedBalance={lockedBalance}
-        />
         <PlaygroundDataTable rows={rows} />
         <div className="flex mt-4 gap-4">
           {/* {

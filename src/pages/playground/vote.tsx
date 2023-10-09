@@ -5,6 +5,10 @@ import Image from 'next/image'
 import { useVote } from '@/hooks/vote/useVote'
 import useBlockTimestamp from '@/hooks/lock/useBlockTimestamp'
 import { useEffect, useState } from 'react'
+import PlaygroundDataTable, {
+  PlaygroundDataTableRowData,
+} from '@/components/new/generics/PlaygroundDataTable'
+import convertUnixToFormattedDate from '@/utils/dateFormatting/convertUnixToFormattedDate'
 
 export default function Vote() {
   const timestamp = useBlockTimestamp()
@@ -24,13 +28,38 @@ export default function Vote() {
       setNextTime(nextTimeCalculated)
     }
   }, [timestamp])
+
+  const abbreviatePoolAddress = (poolAddress: string) => {
+    return `${poolAddress.slice(0, 6)}...${poolAddress.slice(-4)}`
+  }
+  const rows = [
+    // {
+    //   label: 'Pool Address',
+    //   value: abbreviatePoolAddress(sepoliaDefaultPool.address),
+    //   title: sepoliaDefaultPool.address,
+    //   type: 'string',
+    // },
+    // {
+    //   label: 'User Weight',
+    //   value: '100%',
+    //   type: 'string',
+    // },
+    {
+      label: 'Voting Period End',
+      title: nextTime?.toString() ?? '',
+      type: 'bigint',
+      value: nextTime?.toString() ?? 0n,
+      formatFunc: (val: bigint) => {
+        return convertUnixToFormattedDate(Number(val))
+      },
+    },
+  ] as PlaygroundDataTableRowData[]
+
   return (
     <div className="mx-4 flex flex-col items-center justify-center h-screen bg-background">
       <div className="w-full max-w-md p-4 rounded-lg bg-backgroundInteractive shadow-lg">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl text-accent font-semibold">
-            Voting Escrow Lock
-          </h1>
+          <h1 className="text-2xl text-accent font-semibold">Vote</h1>
           <div className="p-1 rounded-full bg-accent">
             <svg
               className="w-6 h-6 text-background"
@@ -52,6 +81,7 @@ export default function Vote() {
           end2={unixEndDate2}
           lockedBalance={lockedBalance}
         /> */}
+        <PlaygroundDataTable rows={rows} />
         <div className="flex mt-4 gap-4">
           {
             <button
@@ -74,10 +104,10 @@ export default function Vote() {
                     width={30}
                     height={20}
                   />
-                  Locking...
+                  Voting...
                 </span>
               ) : (
-                'Deposit to lock'
+                'Emit vote'
               )}
             </button>
           }
