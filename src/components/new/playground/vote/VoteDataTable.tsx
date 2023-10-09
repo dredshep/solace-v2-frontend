@@ -19,7 +19,7 @@ type AABTProps = {
   lockedBalance: bigint | undefined
 }
 
-export default function AllowanceAndBalanceTable({
+export default function VoteDataTable({
   allowance,
   balance,
   end1,

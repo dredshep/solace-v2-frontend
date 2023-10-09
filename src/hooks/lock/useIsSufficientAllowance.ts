@@ -4,17 +4,19 @@ import String0x from '@/constants/types/String0x'
 
 interface UseIsSufficientAllowanceProps {
   requiredAmount: bigint
-  tokenOwner: String0x
+  owner: String0x
   spender: String0x
+  tokenAddress: String0x
 }
 
 export function useIsSufficientAllowance({
   requiredAmount,
-  tokenOwner,
+  owner,
   spender,
+  tokenAddress,
 }: UseIsSufficientAllowanceProps): boolean {
   const [isSufficient, setIsSufficient] = useState(false)
-  const allowance = useAllowance({ tokenOwner, spender })
+  const allowance = useAllowance({ owner, spender, tokenAddress })
 
   useEffect(() => {
     if (typeof allowance === 'bigint' && typeof requiredAmount === 'bigint') {

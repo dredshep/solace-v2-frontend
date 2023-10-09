@@ -11,6 +11,10 @@ import sgtDeploymentAddresses from '@/constants/contracts/sgtDeployments'
 import { MaxInt256 } from 'ethers'
 import classnames from 'classnames'
 import Image from 'next/image'
+import { useLockedBalance } from '@/hooks/lock/useLockedBalance'
+import { useLockedEnd } from '@/hooks/lock/useLockedEnd'
+import PlaygroundDataTable from '@/components/new/generics/PlaygroundDataTable'
+import formatBigInt from '@/utils/numberFormatting/formatBigInt'
 
 export default function Lock() {
   const timestamp = useBlockTimestamp()
@@ -48,6 +52,23 @@ export default function Lock() {
     enabled: typeof address === `string` && address.length === 42,
   })
 
+  const {
+    amount: lockedBalance,
+    unixEndDate,
+    refetch: refetchLockedBalance,
+  } = useLockedBalance({
+    contractAddress: sgtDeploymentAddresses.VotingEscrow,
+    userAddress: address || `0x`,
+    enabled: typeof address === `string` && address.length === 42,
+  })
+  const { unixEndDate: unixEndDate2, refetch: refetchLockedEnd } = useLockedEnd(
+    {
+      contractAddress: sgtDeploymentAddresses.VotingEscrow,
+      userAddress: address || `0x`,
+      enabled: typeof address === `string` && address.length === 42,
+    }
+  )
+
   // with useeffect, refetch with allowance as dependency
   useEffect(() => {
     if (isSuccessApprove === true) refetch()
@@ -71,6 +92,47 @@ export default function Lock() {
     allowance !== undefined &&
     balance !== undefined &&
     allowance < balance?.value
+
+  const convertUnixToFormattedDate = (unixTimestamp: number) => {
+    const dateObj = new Date(unixTimestamp * 1000)
+    const date = dateObj.toISOString().split('T')[0]
+    const time = dateObj.toTimeString().split(' ')[0]
+    const formattedDate = `${date} ${time} GMT`
+    return formattedDate
+  }
+  const end1 = unixEndDate
+  const end2 = unixEndDate2
+
+  const rows = [
+    {
+      label: 'Current Allowance',
+      value: allowance,
+      unit: 'B-80-BAL-20-SGT',
+      formatFunc: formatBigInt, // 10n ** 18n
+    },
+    {
+      label: 'Current Balance',
+      value: balance?.value,
+      unit: 'B-80-BAL-20-SGT',
+      formatFunc: formatBigInt, // 10n ** 18n
+    },
+    {
+      label: 'Locked Balance',
+      value: lockedBalance,
+      unit: 'B-80-BAL-20-SGT',
+      formatFunc: formatBigInt, // 10n ** 18n
+    },
+    {
+      label: 'Locked End 1',
+      value: end1,
+      formatFunc: (val: bigint) => convertUnixToFormattedDate(Number(val)),
+    },
+    {
+      label: 'Locked End 2',
+      value: end2,
+      formatFunc: (val: bigint) => convertUnixToFormattedDate(Number(val)),
+    },
+  ]
 
   return (
     <div className="mx-4 flex flex-col items-center justify-center h-screen bg-background">
@@ -96,7 +158,11 @@ export default function Lock() {
         <AllowanceAndBalanceTable
           allowance={allowance}
           balance={balance?.value}
+          end1={unixEndDate}
+          end2={unixEndDate2}
+          lockedBalance={lockedBalance}
         />
+        <PlaygroundDataTable rows={rows} />
         <div className="flex mt-4 gap-4">
           {/* {
             // needsAllowance ?
