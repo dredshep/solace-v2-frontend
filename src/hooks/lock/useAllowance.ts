@@ -1,23 +1,26 @@
 import String0x from '@/constants/types/String0x'
-import { useEffect, useState } from 'react'
 import { useContractRead, useAccount, erc20ABI } from 'wagmi'
 
 interface UseAllowanceProps {
-  tokenOwner: String0x
+  owner: String0x
+  tokenAddress: String0x
   spender: String0x
+  enabled?: boolean
 }
 
 export function useAllowance({
-  tokenOwner,
+  owner,
+  tokenAddress,
   spender,
-}: UseAllowanceProps): bigint | null {
-  const { data: allowance } = useContractRead({
+  enabled,
+}: UseAllowanceProps) {
+  const { data: allowance, refetch } = useContractRead({
     abi: erc20ABI,
-    address: tokenOwner,
+    address: tokenAddress,
     functionName: 'allowance',
-    args: [tokenOwner, spender],
-    enabled: !!tokenOwner,
+    args: [owner, spender],
+    enabled: enabled ?? true,
   })
 
-  return allowance as bigint | null
+  return { allowance, refetch }
 }
