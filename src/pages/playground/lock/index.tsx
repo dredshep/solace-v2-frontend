@@ -100,34 +100,40 @@ export default function Lock() {
 
   const rows = [
     {
+      type: 'bigint',
       label: 'Current Allowance',
       value: allowance,
       unit: 'B-80-BAL-20-SGT',
       formatFunc: formatBigInt, // 10n ** 18n
     },
     {
+      type: 'bigint',
       label: 'Current Balance',
       value: balance?.value,
       unit: 'B-80-BAL-20-SGT',
       formatFunc: formatBigInt, // 10n ** 18n
     },
     {
+      type: 'bigint',
       label: 'Locked Balance',
       value: lockedBalance,
       unit: 'B-80-BAL-20-SGT',
       formatFunc: formatBigInt, // 10n ** 18n
     },
     {
+      type: 'bigint',
       label: 'Locked End 1',
       value: end1,
       formatFunc: (val: bigint) => convertUnixToFormattedDate(Number(val)),
     },
     {
+      type: 'bigint',
       label: 'Locked End 2',
       value: end2,
       formatFunc: (val: bigint) => convertUnixToFormattedDate(Number(val)),
     },
   ] as PlaygroundDataTableRowData[]
+  console.log(rows)
 
   return (
     <div className="mx-4 flex flex-col items-center justify-center h-screen bg-background">

@@ -65,12 +65,14 @@ export default function PlaygroundDataTable({ rows }: PDTProps) {
               {row.label}
             </td>
             <td
-              className={`px-4 bg-backgroundMoreInteractive text-accent ${
+              className={`px-4 bg-backgroundMoreInteractive flex justify-between text-accent ${
                 index === 0 ? 'rounded-tr-md pt-[5px]' : ''
               } ${index === lastIndex ? 'rounded-br-md pb-1' : 'pb-1'}`}
               title={row.title ?? row.value?.toString() ?? ''}
             >
-              {address ? renderValue(row) : 'connect wallet'}
+              {address
+                ? (console.log({ value: renderValue(row) }), renderValue(row))
+                : 'connect wallet'}
               {row.type === 'bigint' && row.unit ? (
                 <span className="text-secondary">{row.unit}</span>
               ) : null}
